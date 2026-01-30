@@ -2,8 +2,16 @@
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
-    '@nuxt/ui'
+    '@nuxt/ui',
+    '@nuxt/icon'
   ],
+
+  icon: {
+    serverBundle: 'remote',
+    clientBundle: {
+      scan: true
+    }
+  },
 
   devtools: {
     enabled: true
@@ -11,8 +19,22 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  routeRules: {
-    '/': { prerender: true }
+  runtimeConfig: {
+    public: {
+      apiBase: 'http://localhost:8080'
+    }
+  },
+
+  nitro: {
+    devProxy: {
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
+      }
+    },
+    routeRules: {
+      '/api/**': { proxy: 'http://localhost:8080/**' }
+    }
   },
 
   compatibilityDate: '2025-01-15',
@@ -26,3 +48,4 @@ export default defineNuxtConfig({
     }
   }
 })
+

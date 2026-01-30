@@ -5,14 +5,17 @@ import type { ProfileResponse, Skill } from '../types'
 const md = new MarkdownIt({ html: true, linkify: true, breaks: true })
 const renderMarkdown = (text: string) => text ? md.render(text) : ''
 
-const { data: profile } = await useFetch<ProfileResponse>('http://localhost:8080/api/v1/profile')
+const config = useRuntimeConfig()
+const { data: profile } = await useFetch<ProfileResponse>('/api/v1/profile', {
+  baseURL: config.public.apiBase as string
+})
 
 // Group skills by category
 const skillsByCategory = computed(() => {
   if (!profile.value?.skills) return {}
   return profile.value.skills.reduce((acc, skill) => {
     if (!acc[skill.category]) acc[skill.category] = []
-    acc[skill.category].push(skill)
+    acc[skill.category]!.push(skill)
     return acc
   }, {} as Record<string, Skill[]>)
 })
@@ -110,9 +113,9 @@ const typingTexts = [
 
     <!-- About Section -->
     <UPageSection id="about" title="About Me" description="기술 스택과 전문 분야">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <!-- Bio -->
-        <div class="space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+        <!-- Bio (3/5 = 60%) -->
+        <div class="lg:col-span-3 space-y-6">
           <div class="glass rounded-2xl p-6">
             <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">자기소개</h3>
             <p class="text-gray-600 dark:text-gray-300 leading-relaxed whitespace-pre-line">
@@ -121,8 +124,8 @@ const typingTexts = [
           </div>
         </div>
 
-        <!-- Skills as Badges -->
-        <div class="space-y-6">
+        <!-- Skills as Badges (2/5 = 40%) -->
+        <div class="lg:col-span-2 space-y-6">
           <div v-for="(skills, category) in skillsByCategory" :key="category" class="space-y-3">
             <h3 class="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
               <UIcon 
@@ -152,7 +155,7 @@ const typingTexts = [
     <UPageSection id="awards" title="Awards" description="수상 내역">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
         <div v-for="award in profile?.awards" :key="award.id" class="glass rounded-xl p-6 card-hover border-l-4 border-primary-500 flex flex-col h-full">
-          <div class="flex justify-between items-start mb-2">
+          <div class="flex justify-between items-start mb-2 gap-4">
             <h4 class="font-bold text-lg text-gray-900 dark:text-white">{{ award.title }}</h4>
             <time class="text-sm font-medium text-gray-500 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">{{ award.date }}</time>
           </div>

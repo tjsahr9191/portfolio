@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import type { Project } from '../../types'
 
-const { data: projects } = await useFetch<Project[]>('http://localhost:8080/api/v1/projects')
+const config = useRuntimeConfig()
+const { data: projects } = await useFetch<Project[]>('/api/v1/projects', {
+  baseURL: config.public.apiBase as string
+})
 
 // Get all unique tech stacks
 const allTechStacks = computed(() => {

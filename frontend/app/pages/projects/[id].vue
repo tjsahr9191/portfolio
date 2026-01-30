@@ -4,9 +4,14 @@ import type { Project } from '../../types'
 
 const route = useRoute()
 const md = new MarkdownIt()
+const config = useRuntimeConfig()
 
-const { data: project } = await useFetch<Project>(`http://localhost:8080/api/v1/projects/${route.params.id}`)
-const { data: allProjects } = await useFetch<Project[]>('http://localhost:8080/api/v1/projects')
+const { data: project } = await useFetch<Project>(`/api/v1/projects/${route.params.id}`, {
+  baseURL: config.public.apiBase as string
+})
+const { data: allProjects } = await useFetch<Project[]>('/api/v1/projects', {
+  baseURL: config.public.apiBase as string
+})
 
 const renderedContent = computed(() => {
     return project.value ? md.render(project.value.content) : ''
