@@ -8,10 +8,10 @@ defineProps<{
 
 <template>
   <div 
-    class="card-hover cursor-pointer group"
+    class="card-hover cursor-pointer group h-full"
     @click="navigateTo(`/projects/${project.id}`)"
   >
-    <UCard class="h-full overflow-hidden">
+    <UCard class="h-full overflow-hidden flex flex-col">
       <template #header>
         <div class="h-48 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 -mx-4 -mt-4 mb-4 flex items-center justify-center overflow-hidden relative">
           <img 
@@ -28,33 +28,37 @@ defineProps<{
           <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
         
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-500 transition-colors">
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-500 transition-colors line-clamp-2 min-h-[3.5rem]">
           {{ project.title }}
         </h3>
       </template>
 
-      <p class="text-gray-600 dark:text-gray-300 line-clamp-2 mb-4">
-        {{ project.description }}
-      </p>
+      <div class="flex flex-col flex-grow">
+        <p class="text-gray-600 dark:text-gray-300 line-clamp-2 mb-4 min-h-[3rem]">
+          {{ project.description }}
+        </p>
 
-      <!-- Tech Stack -->
-      <div v-if="project.techStack?.length" class="flex flex-wrap gap-1.5 mb-4">
-        <UBadge 
-          v-for="tech in project.techStack.slice(0, 4)" 
-          :key="tech" 
-          :label="tech" 
-          color="primary" 
-          variant="subtle"
-          size="sm"
-          class="tech-badge"
-        />
-        <UBadge 
-          v-if="project.techStack.length > 4"
-          :label="`+${project.techStack.length - 4}`"
-          color="neutral"
-          variant="subtle"
-          size="sm"
-        />
+        <!-- Tech Stack -->
+        <div class="flex flex-wrap gap-1.5 mb-4 min-h-[2rem]">
+          <template v-if="project.techStack?.length">
+            <UBadge 
+              v-for="tech in project.techStack.slice(0, 4)" 
+              :key="tech" 
+              :label="tech" 
+              color="primary" 
+              variant="subtle"
+              size="sm"
+              class="tech-badge"
+            />
+            <UBadge 
+              v-if="project.techStack.length > 4"
+              :label="`+${project.techStack.length - 4}`"
+              color="neutral"
+              variant="subtle"
+              size="sm"
+            />
+          </template>
+        </div>
       </div>
 
       <template #footer>
@@ -75,3 +79,4 @@ defineProps<{
     </UCard>
   </div>
 </template>
+

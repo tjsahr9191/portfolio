@@ -35,7 +35,7 @@ class DataInitializer {
                     shortBio = "Software Engineer | Java, Kotlin, Spring Boot",
                     githubUrl = "https://github.com/tjsahr9191",
                     linkedinUrl = null,
-                    blogUrl = null,
+                    blogUrl = "https://velog.io/@dbtjsahr/posts",
                     profileImageUrl = "/images/KakaoTalk_20241115_193738824.jpg"
                 )
             )
@@ -66,6 +66,7 @@ class DataInitializer {
                         demoUrl = null,
                         startDate = LocalDate.now().minusWeeks(2),
                         isActive = true,
+                        thumbnailUrl = "/images/portfolio-logo.png",
                         techStack = mutableListOf("Spring Boot", "Kotlin", "Nuxt 3", "Vue.js", "TailwindCSS", "H2"),
                         featured = true
                     ),
@@ -92,6 +93,7 @@ class DataInitializer {
                         startDate = LocalDate.of(2025, 12, 1),
                         endDate = LocalDate.of(2026, 1, 31),
                         isActive = true,
+                        thumbnailUrl = "/images/stolink.png",
                         techStack = mutableListOf("Python", "FastAPI", "LangChain", "RabbitMQ", "Redis", "PostgreSQL", "AWS"),
                         featured = true
                     ),
@@ -114,6 +116,7 @@ class DataInitializer {
                         startDate = LocalDate.of(2025, 9, 1),
                         endDate = LocalDate.of(2025, 9, 30),
                         isActive = true,
+                        thumbnailUrl = "/images/court-kok.png",
                         techStack = mutableListOf("Spring Boot", "JPA", "MySQL", "Redis", "WebSocket", "GitHub Actions"),
                         featured = true
                     ),
@@ -135,6 +138,7 @@ class DataInitializer {
                         startDate = LocalDate.of(2024, 6, 1),
                         endDate = LocalDate.of(2024, 6, 30),
                         isActive = true,
+                        thumbnailUrl = "/images/svd.png",
                         techStack = mutableListOf("Python", "NumPy", "OpenCV", "Multi-threading"),
                         featured = true
                     ),
@@ -160,6 +164,7 @@ class DataInitializer {
                         startDate = LocalDate.of(2024, 3, 1),
                         endDate = LocalDate.of(2024, 5, 31),
                         isActive = true,
+                        thumbnailUrl = "/images/canon.png",
                         techStack = mutableListOf("Python", "PyTorch", "OpenCV", "CNN", "Design Patterns"),
                         featured = true
                     ),
@@ -186,6 +191,7 @@ Spring Boot, JPA 스터디 후 사이드 프로젝트로 발전
                         startDate = LocalDate.of(2023, 12, 1),
                         endDate = LocalDate.of(2024, 2, 29),
                         isActive = true,
+                        thumbnailUrl = "/images/마켓브릿지.png",
                         techStack = mutableListOf("Spring Boot", "JPA", "MySQL", "Redis", "ShedLock", "Spring REST Docs"),
                         featured = true
                     )

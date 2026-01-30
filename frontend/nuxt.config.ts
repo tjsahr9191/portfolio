@@ -1,17 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: false,
+
   modules: [
     '@nuxt/eslint',
-    '@nuxt/ui',
-    '@nuxt/icon'
+    '@nuxt/ui'
   ],
-
-  icon: {
-    serverBundle: 'remote',
-    clientBundle: {
-      scan: true
-    }
-  },
 
   devtools: {
     enabled: true

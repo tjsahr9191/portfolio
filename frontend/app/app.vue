@@ -60,6 +60,14 @@ useSeoMeta({
           color="neutral"
           variant="ghost"
         />
+        <UButton
+          to="https://velog.io/@dbtjsahr/posts"
+          target="_blank"
+          icon="i-lucide-pen-line"
+          aria-label="Blog"
+          color="neutral"
+          variant="ghost"
+        />
       </template>
     </UHeader>
 
@@ -89,6 +97,15 @@ useSeoMeta({
             target="_blank"
             icon="i-simple-icons-github"
             aria-label="GitHub"
+            color="neutral"
+            variant="ghost"
+            size="sm"
+          />
+          <UButton
+            to="https://velog.io/@dbtjsahr/posts"
+            target="_blank"
+            icon="i-lucide-pen-line"
+            aria-label="Blog"
             color="neutral"
             variant="ghost"
             size="sm"

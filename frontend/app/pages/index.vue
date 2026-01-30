@@ -54,7 +54,9 @@ const typingTexts = [
                 <span class="text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-medium mb-1.5">입니다.</span>
               </div>
               <div class="text-2xl md:text-3xl text-gray-600 dark:text-gray-300 h-10">
-                <TypingText :texts="typingTexts" />
+                <ClientOnly>
+                  <TypingText :texts="typingTexts" />
+                </ClientOnly>
               </div>
               <p class="text-lg text-gray-600 dark:text-gray-400 max-w-xl">
                 {{ profile?.personalInfo?.shortBio || 'Spring Boot, Kotlin, Vue.js를 활용한 풀스택 개발자입니다.' }}
@@ -286,6 +288,18 @@ const typingTexts = [
               icon="i-simple-icons-linkedin"
             >
               LinkedIn
+            </UButton>
+            
+            <UButton 
+              v-if="profile?.personalInfo?.blogUrl"
+              :to="profile.personalInfo.blogUrl"
+              target="_blank"
+              size="xl"
+              color="neutral"
+              variant="subtle"
+              icon="i-lucide-pen-line"
+            >
+              Blog
             </UButton>
           </div>
 
