@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: portfolio-config
+  namespace: portfolio
+  labels:
+    app.kubernetes.io/name: portfolio
+data:
+  # Spring Boot configuration
+  SPRING_PROFILES_ACTIVE: "prod"
+  DB_PORT: "3306"
+  DB_NAME: "portfolio"
+  
+  # Frontend configuration
+  NODE_ENV: "production"
+  
+  # AWS/ECR configuration (replace with your values)
+  AWS_REGION: "ap-northeast-2"
+  ECR_REGISTRY: "147100278252.dkr.ecr.ap-northeast-2.amazonaws.com/ysm-k3s-portfolio-ecr"

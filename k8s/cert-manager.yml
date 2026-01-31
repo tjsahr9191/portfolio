@@ -1,0 +1,21 @@
+# cert-manager installation
+# This file applies the cert-manager CRDs and deployment
+# 
+# Alternative: Install via helm or kubectl directly:
+# kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.4/cert-manager.yaml
+#
+# After installation, wait for cert-manager to be ready:
+# kubectl wait --for=condition=Available deployment --all -n cert-manager --timeout=300s
+
+---
+# For k3s, we just reference the official manifest
+# Run this command to install cert-manager:
+#
+# kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.4/cert-manager.yaml
+#
+# This creates:
+# - cert-manager namespace
+# - CRDs (Certificate, ClusterIssuer, Issuer, etc.)
+# - cert-manager deployment
+# - webhook deployment
+# - cainjector deployment
