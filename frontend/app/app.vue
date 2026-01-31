@@ -32,7 +32,10 @@ useSeoMeta({
   <UApp>
     <UHeader>
       <template #left>
-        <NuxtLink to="/" class="flex items-center gap-2 group">
+        <NuxtLink
+          to="/"
+          class="flex items-center gap-2 group"
+        >
           <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center">
             <span class="text-white font-bold text-sm">P</span>
           </div>
@@ -41,11 +44,31 @@ useSeoMeta({
 
         <!-- Navigation -->
         <nav class="hidden md:flex items-center gap-1 ml-8">
-          <UButton to="/" variant="ghost" color="neutral" label="Home" />
-          <UButton to="/projects" variant="ghost" color="neutral" label="Projects" />
-          <UButton to="/#about" variant="ghost" color="neutral" label="About" />
+          <UButton
+            to="/"
+            variant="ghost"
+            color="neutral"
+            label="Home"
+          />
+          <UButton
+            to="/projects"
+            variant="ghost"
+            color="neutral"
+            label="Projects"
+          />
+          <UButton
+            to="/#about"
+            variant="ghost"
+            color="neutral"
+            label="About"
+          />
 
-          <UButton to="/#contact" variant="ghost" color="neutral" label="Contact" />
+          <UButton
+            to="/#contact"
+            variant="ghost"
+            color="neutral"
+            label="Contact"
+          />
         </nav>
       </template>
 
@@ -84,8 +107,18 @@ useSeoMeta({
             © {{ new Date().getFullYear() }} Portfolio. Built with
           </p>
           <div class="flex items-center gap-2">
-            <UBadge label="Nuxt 3" color="green" variant="subtle" size="sm" />
-            <UBadge label="Spring Boot" color="green" variant="subtle" size="sm" />
+            <UBadge
+              label="Nuxt 3"
+              color="green"
+              variant="subtle"
+              size="sm"
+            />
+            <UBadge
+              label="Spring Boot"
+              color="green"
+              variant="subtle"
+              size="sm"
+            />
           </div>
         </div>
       </template>
@@ -115,4 +148,3 @@ useSeoMeta({
     </UFooter>
   </UApp>
 </template>
-

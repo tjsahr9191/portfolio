@@ -17,10 +17,10 @@ const pauseTime = props.pauseTime || 2000
 const type = () => {
   const currentText = props.texts[currentIndex.value]
   if (!currentText) return
-  
+
   if (!isDeleting.value) {
     displayText.value = currentText.substring(0, displayText.value.length + 1)
-    
+
     if (displayText.value === currentText) {
       setTimeout(() => {
         isDeleting.value = true
@@ -30,13 +30,13 @@ const type = () => {
     }
   } else {
     displayText.value = currentText.substring(0, displayText.value.length - 1)
-    
+
     if (displayText.value === '') {
       isDeleting.value = false
       currentIndex.value = (currentIndex.value + 1) % props.texts.length
     }
   }
-  
+
   setTimeout(type, isDeleting.value ? deleteSpeed : typingSpeed)
 }
 

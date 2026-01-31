@@ -16,43 +16,55 @@ const iconSize = {
 
 <template>
   <div class="flex items-center gap-4">
-    <a 
-      v-if="github" 
-      :href="github" 
+    <a
+      v-if="github"
+      :href="github"
       target="_blank"
       class="social-icon text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
       aria-label="GitHub"
     >
-      <UIcon name="i-simple-icons-github" :class="iconSize[size || 'md']" />
+      <UIcon
+        name="i-simple-icons-github"
+        :class="iconSize[size || 'md']"
+      />
     </a>
-    
-    <a 
-      v-if="linkedin" 
-      :href="linkedin" 
+
+    <a
+      v-if="linkedin"
+      :href="linkedin"
       target="_blank"
       class="social-icon text-gray-600 dark:text-gray-400 hover:text-[#0A66C2]"
       aria-label="LinkedIn"
     >
-      <UIcon name="i-simple-icons-linkedin" :class="iconSize[size || 'md']" />
+      <UIcon
+        name="i-simple-icons-linkedin"
+        :class="iconSize[size || 'md']"
+      />
     </a>
-    
-    <a 
-      v-if="blog" 
-      :href="blog" 
+
+    <a
+      v-if="blog"
+      :href="blog"
       target="_blank"
       class="social-icon text-gray-600 dark:text-gray-400 hover:text-primary-500"
       aria-label="Blog"
     >
-      <UIcon name="i-lucide-pen-line" :class="iconSize[size || 'md']" />
+      <UIcon
+        name="i-lucide-pen-line"
+        :class="iconSize[size || 'md']"
+      />
     </a>
-    
-    <a 
-      v-if="email" 
+
+    <a
+      v-if="email"
       :href="`mailto:${email}`"
       class="social-icon text-gray-600 dark:text-gray-400 hover:text-red-500"
       aria-label="Email"
     >
-      <UIcon name="i-lucide-mail" :class="iconSize[size || 'md']" />
+      <UIcon
+        name="i-lucide-mail"
+        :class="iconSize[size || 'md']"
+      />
     </a>
   </div>
 </template>

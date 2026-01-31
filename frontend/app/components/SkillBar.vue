@@ -21,8 +21,8 @@ onMounted(() => {
       <span class="text-sm text-gray-500 dark:text-gray-400">{{ proficiency }}%</span>
     </div>
     <div class="skill-bar">
-      <div 
-        class="skill-bar-fill" 
+      <div
+        class="skill-bar-fill"
         :style="{ width: barWidth ? `${proficiency}%` : '0%' }"
       />
     </div>

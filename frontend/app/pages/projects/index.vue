@@ -10,7 +10,7 @@ const { data: projects } = await useFetch<Project[]>('/api/v1/projects', {
 const allTechStacks = computed(() => {
   if (!projects.value) return []
   const techs = new Set<string>()
-  projects.value.forEach(p => {
+  projects.value.forEach((p) => {
     p.techStack?.forEach(t => techs.add(t))
   })
   return Array.from(techs).sort()
@@ -62,25 +62,36 @@ const clearFilter = () => {
             @click="selectedTech = tech"
           />
         </div>
-        
-        <p v-if="selectedTech" class="text-sm text-gray-500 dark:text-gray-400 mt-2">
+
+        <p
+          v-if="selectedTech"
+          class="text-sm text-gray-500 dark:text-gray-400 mt-2"
+        >
           {{ filteredProjects.length }}개의 프로젝트가 "{{ selectedTech }}"와 관련되어 있습니다.
         </p>
       </div>
 
       <!-- Projects Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <ProjectCard 
-          v-for="project in filteredProjects" 
-          :key="project.id" 
+        <ProjectCard
+          v-for="project in filteredProjects"
+          :key="project.id"
           :project="project"
         />
       </div>
 
       <!-- Empty State -->
-      <div v-if="filteredProjects.length === 0" class="text-center py-12">
-        <UIcon name="i-lucide-search-x" class="w-16 h-16 text-gray-400 mx-auto mb-4" />
-        <p class="text-gray-500 dark:text-gray-400">해당 기술 스택을 사용한 프로젝트가 없습니다.</p>
+      <div
+        v-if="filteredProjects.length === 0"
+        class="text-center py-12"
+      >
+        <UIcon
+          name="i-lucide-search-x"
+          class="w-16 h-16 text-gray-400 mx-auto mb-4"
+        />
+        <p class="text-gray-500 dark:text-gray-400">
+          해당 기술 스택을 사용한 프로젝트가 없습니다.
+        </p>
         <UButton
           label="필터 초기화"
           variant="link"
