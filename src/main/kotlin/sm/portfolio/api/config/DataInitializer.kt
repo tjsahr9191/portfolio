@@ -24,21 +24,20 @@ class DataInitializer {
         activityRepository: ActivityRepository
     ) = CommandLineRunner {
         // Personal Info
-        if (personalInfoRepository.count() == 0L) {
-            personalInfoRepository.save(
-                PersonalInfo(
-                    name = "유선목",
-                    email = "tjsahr9191@naver.com",
-                    phone = "+82-10-3424-5140",
-                    bio = "쿼리 최적화로 775배, API 처리량 3.5배 개선 등 성능 병목을 분석하고 해결하는 백엔드 개발자입니다.\n비관적·낙관적·네임드 락 성능 비교 테스트를 수행하며, 낙관적 락에서 발생한 데드락 문제를 분석하고 해결했고, ShedLock과 Redis 분산 락으로 분산 환경에 대응했습니다.\nJUnit 기반 테스트 커버리지 90%를 유지하며 안정적인 코드 확장을 추구합니다.\nJava, Spring Boot를 주력으로 하며, AI Agent 시스템 설계 및 메시지 큐 기반 비동기 처리를 구현한 경험이 있습니다.\n크래프톤 정글에서 매주 새로운 팀과 협업하며 커뮤니케이션 역량을 키웠고, 스터디에서 배운 내용을 실제 프로젝트에 적용하며 성장하고 있습니다. 멘토링을 통해 지식을 공유하고, 학업 최우수상 수상으로 성실한 학습 태도를 증명했습니다.",
-                    shortBio = "Software Engineer | Java, Kotlin, Spring Boot",
-                    githubUrl = "https://github.com/tjsahr9191",
-                    linkedinUrl = null,
-                    blogUrl = "https://velog.io/@dbtjsahr/posts",
-                    profileImageUrl = "/images/KakaoTalk_20241115_193738824.jpg"
-                )
+        personalInfoRepository.deleteAll()
+        personalInfoRepository.save(
+            PersonalInfo(
+                name = "유선목",
+                email = "tjsahr9191@naver.com",
+                phone = "+82-10-3424-5140",
+                bio = "쿼리 최적화로 775배, API 처리량 3.5배 개선 등 성능 병목을 분석하고 해결하는 백엔드 개발자입니다.\n비관적·낙관적·네임드 락 성능 비교 테스트를 수행하며, 낙관적 락에서 발생한 데드락 문제를 분석하고 해결했고, ShedLock과 Redis 분산 락으로 분산 환경에 대응했습니다.\nJUnit 기반 테스트 커버리지 90%를 유지하며 안정적인 코드 확장을 추구합니다.\nJava, Spring Boot를 주력으로 하며, AI Agent 시스템 설계 및 메시지 큐 기반 비동기 처리를 구현한 경험이 있습니다.\n크래프톤 정글에서 매주 새로운 팀과 협업하며 커뮤니케이션 역량을 키웠고, 스터디에서 배운 내용을 실제 프로젝트에 적용하며 성장하고 있습니다. 멘토링을 통해 지식을 공유하고, 학업 최우수상 수상으로 성실한 학습 태도를 증명했습니다.",
+                shortBio = "Software Engineer | Java, Kotlin, Spring Boot",
+                githubUrl = "https://github.com/tjsahr9191",
+                linkedinUrl = null,
+                blogUrl = "https://velog.io/@dbtjsahr/posts",
+                profileImageUrl = "/images/KakaoTalk_20241115_193738824.jpg"
             )
-        }
+        )
 
         // Projects
         projectRepository.deleteAll()
@@ -198,113 +197,107 @@ Spring Boot, JPA 스터디 후 사이드 프로젝트로 발전
             )
 
         // Skills
-        if (skillRepository.count() == 0L) {
-            skillRepository.saveAll(
-                listOf(
-                    // Language
-                    Skill(name = "Java", category = SkillCategory.LANGUAGE),
-                    Skill(name = "Kotlin", category = SkillCategory.LANGUAGE),
-                    // Backend
-                    Skill(name = "Spring Boot", category = SkillCategory.BACKEND),
-                    Skill(name = "JPA", category = SkillCategory.BACKEND),
-                    Skill(name = "JUnit", category = SkillCategory.BACKEND),
-                    Skill(name = "MySQL", category = SkillCategory.BACKEND),
-                    Skill(name = "Redis", category = SkillCategory.BACKEND),
-                    Skill(name = "RabbitMQ", category = SkillCategory.BACKEND),
-                    // DevOps
-                    Skill(name = "AWS EC2", category = SkillCategory.DEVOPS),
-                    Skill(name = "AWS RDS", category = SkillCategory.DEVOPS),
-                    Skill(name = "Docker", category = SkillCategory.DEVOPS),
-                    Skill(name = "Kubernetes", category = SkillCategory.DEVOPS),
-                    Skill(name = "GitHub Actions", category = SkillCategory.DEVOPS),
-                    Skill(name = "k6", category = SkillCategory.DEVOPS),
-                    Skill(name = "Prometheus", category = SkillCategory.DEVOPS),
-                    Skill(name = "Grafana", category = SkillCategory.DEVOPS)
-                )
+        skillRepository.deleteAll()
+        skillRepository.saveAll(
+            listOf(
+                // Language
+                Skill(name = "Java", category = SkillCategory.LANGUAGE),
+                Skill(name = "Kotlin", category = SkillCategory.LANGUAGE),
+                // Backend
+                Skill(name = "Spring Boot", category = SkillCategory.BACKEND),
+                Skill(name = "JPA", category = SkillCategory.BACKEND),
+                Skill(name = "JUnit", category = SkillCategory.BACKEND),
+                Skill(name = "MySQL", category = SkillCategory.BACKEND),
+                Skill(name = "Redis", category = SkillCategory.BACKEND),
+                Skill(name = "RabbitMQ", category = SkillCategory.BACKEND),
+                // DevOps
+                Skill(name = "AWS EC2", category = SkillCategory.DEVOPS),
+                Skill(name = "AWS RDS", category = SkillCategory.DEVOPS),
+                Skill(name = "Docker", category = SkillCategory.DEVOPS),
+                Skill(name = "Kubernetes", category = SkillCategory.DEVOPS),
+                Skill(name = "GitHub Actions", category = SkillCategory.DEVOPS),
+                Skill(name = "k6", category = SkillCategory.DEVOPS),
+                Skill(name = "Prometheus", category = SkillCategory.DEVOPS),
+                Skill(name = "Grafana", category = SkillCategory.DEVOPS)
             )
-        }
+        )
 
 
 
         // Awards
-        if (awardRepository.count() == 0L) {
-            awardRepository.saveAll(
-                listOf(
-                    Award(title = "학업 최우수상", organization = "한양대학교 ERICA", date = "2025. 04.", description = "전체 평점 우수"),
-                    Award(title = "프로젝트 장려상", organization = "메타버스 아카데미 부트캠프", date = "2022. 12.", description = "23개 팀 중 3위")
-                )
+        awardRepository.deleteAll()
+        awardRepository.saveAll(
+            listOf(
+                Award(title = "학업 최우수상", organization = "한양대학교 ERICA", date = "2025. 04.", description = "전체 평점 우수"),
+                Award(title = "프로젝트 장려상", organization = "메타버스 아카데미 부트캠프", date = "2022. 12.", description = "23개 팀 중 3위")
             )
-        }
+        )
 
         // Education
-        if (educationRepository.count() == 0L) {
-            educationRepository.saveAll(
-                listOf(
-                    Education(
-                        institution = "크래프톤 정글",
-                        degree = "수료",
-                        major = "SW 엔지니어링",
-                        startDate = "2025. 09.",
-                        endDate = "2026. 01."
-                    ),
-                    Education(
-                        institution = "메타버스 아카데미",
-                        degree = "수료",
-                        major = "XR 전공",
-                        startDate = "2022. 05.",
-                        endDate = "2022. 12."
-                    ),
-                    Education(
-                        institution = "한양대학교 ERICA",
-                        degree = "학사 (복수전공)",
-                        major = "컴퓨터공학",
-                        gpa = "4.41/4.5",
-                        startDate = "2019. 09.",
-                        endDate = "2026. 02."
-                    ),
-                    Education(
-                        institution = "한양대학교 ERICA",
-                        degree = "학사 (주전공)",
-                        major = "응용수학과",
-                        gpa = "4.1/4.5",
-                        startDate = "2018. 03.",
-                        endDate = "2026. 02."
-                    )
+        educationRepository.deleteAll()
+        educationRepository.saveAll(
+            listOf(
+                Education(
+                    institution = "크래프톤 정글",
+                    degree = "수료",
+                    major = "SW 엔지니어링",
+                    startDate = "2025. 09.",
+                    endDate = "2026. 01."
+                ),
+                Education(
+                    institution = "메타버스 아카데미",
+                    degree = "수료",
+                    major = "XR 전공",
+                    startDate = "2022. 05.",
+                    endDate = "2022. 12."
+                ),
+                Education(
+                    institution = "한양대학교 ERICA",
+                    degree = "학사 (복수전공)",
+                    major = "컴퓨터공학",
+                    gpa = "4.41/4.5",
+                    startDate = "2019. 09.",
+                    endDate = "2026. 02."
+                ),
+                Education(
+                    institution = "한양대학교 ERICA",
+                    degree = "학사 (주전공)",
+                    major = "응용수학과",
+                    gpa = "4.1/4.5",
+                    startDate = "2018. 03.",
+                    endDate = "2026. 02."
                 )
             )
-        }
+        )
 
         // Certifications
-        if (certificationRepository.count() == 0L) {
-            certificationRepository.saveAll(
-                listOf(
-                    Certification(name = "정보처리기사", date = "2025. 09.", organization = "한국산업인력공단"),
-                    Certification(name = "SQLD", date = "2025. 04.", organization = "한국데이터산업진흥원")
-                )
+        certificationRepository.deleteAll()
+        certificationRepository.saveAll(
+            listOf(
+                Certification(name = "정보처리기사", date = "2025. 09.", organization = "한국산업인력공단"),
+                Certification(name = "SQLD", date = "2025. 04.", organization = "한국데이터산업진흥원")
             )
-        }
+        )
 
         // Language Skills
-        if (languageSkillRepository.count() == 0L) {
-            languageSkillRepository.saveAll(
-                listOf(
-                    LanguageSkill(name = "TOEIC Speaking", level = "IM2", date = "2025. 03.")
-                )
+        languageSkillRepository.deleteAll()
+        languageSkillRepository.saveAll(
+            listOf(
+                LanguageSkill(name = "TOEIC Speaking", level = "IM2", date = "2025. 03.")
             )
-        }
+        )
 
         // Activities
-        if (activityRepository.count() == 0L) {
-            activityRepository.saveAll(
-                listOf(
-                    Activity(title = "클린 코드 스터디", period = "24.09", description = "2인 스터디 리드. 코드 가독성과 유지보수성 향상을 위한 원칙 학습"),
-                    Activity(title = "테스트 코드 스터디", period = "23.12", description = "6인 스터디 리드. Mock을 활용하여 외부 의존성을 격리한 단위 테스트 작성, 테스트 커버리지 90% 달성"),
-                    Activity(title = "모던 자바 인 액션 스터디", period = "23.10 ~ 23.11", description = "6인 스터디 리드. 스트림, 람다를 학습하고 실제 프로젝트에 적용하여 가독성 높은 코드 작성"),
-                    Activity(title = "디자인 패턴 스터디", period = "23.09 ~ 23.10", description = "6인 스터디 리드. 학습한 디자인 패턴을 실제 프로젝트에 적용하여 유연하고 유지보수성 높은 코드 작성"),
-                    Activity(title = "Java, SpringBoot, JPA 스터디", period = "23.09 ~ 23.12", description = "6인 스터디 리드. 책과 강의를 기반으로 학습한 내용을 실제로 적용하기 위해 사이드 프로젝트 진행")
-                )
+        activityRepository.deleteAll()
+        activityRepository.saveAll(
+            listOf(
+                Activity(title = "클린 코드 스터디", period = "24.09", description = "2인 스터디 리드. 코드 가독성과 유지보수성 향상을 위한 원칙 학습"),
+                Activity(title = "테스트 코드 스터디", period = "23.12", description = "6인 스터디 리드. Mock을 활용하여 외부 의존성을 격리한 단위 테스트 작성, 테스트 커버리지 90% 달성"),
+                Activity(title = "모던 자바 인 액션 스터디", period = "23.10 ~ 23.11", description = "6인 스터디 리드. 스트림, 람다를 학습하고 실제 프로젝트에 적용하여 가독성 높은 코드 작성"),
+                Activity(title = "디자인 패턴 스터디", period = "23.09 ~ 23.10", description = "6인 스터디 리드. 학습한 디자인 패턴을 실제 프로젝트에 적용하여 유연하고 유지보수성 높은 코드 작성"),
+                Activity(title = "Java, SpringBoot, JPA 스터디", period = "23.09 ~ 23.12", description = "6인 스터디 리드. 책과 강의를 기반으로 학습한 내용을 실제로 적용하기 위해 사이드 프로젝트 진행")
             )
-        }
+        )
     }
 }
 
