@@ -9,7 +9,6 @@ import sm.portfolio.api.repository.*
 import java.time.LocalDate
 
 @Configuration
-@Profile("!prod") // Don't run in production
 class DataInitializer {
 
     @Bean
