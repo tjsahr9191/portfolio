@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import MarkdownIt from 'markdown-it'
 import type { ProfileResponse, Skill } from '../types'
-
-const md = new MarkdownIt({ html: true, linkify: true, breaks: true })
-const renderMarkdown = (text: string) => text ? md.render(text) : ''
 
 const config = useRuntimeConfig()
 const { data: profile } = await useFetch<ProfileResponse>('/api/v1/profile', {
