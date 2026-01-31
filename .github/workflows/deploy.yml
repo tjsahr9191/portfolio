@@ -58,6 +58,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
+          platforms: linux/arm64
           tags: |
             ${{ env.ECR_REGISTRY }}/${{ env.BACKEND_IMAGE }}:${{ steps.meta.outputs.version }}
             ${{ env.ECR_REGISTRY }}/${{ env.BACKEND_IMAGE }}:latest
@@ -71,6 +72,7 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
+          platforms: linux/arm64
           tags: |
             ${{ env.ECR_REGISTRY }}/${{ env.FRONTEND_IMAGE }}:${{ steps.meta.outputs.version }}
             ${{ env.ECR_REGISTRY }}/${{ env.FRONTEND_IMAGE }}:latest
