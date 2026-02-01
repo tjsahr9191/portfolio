@@ -459,7 +459,7 @@ RabbitMQ Consumer의 set_qos()에서 prefetch_count를 120으로 설정
 - 다수의 사용자가 동시에 예약 신청 시 **Race Condition** 발생 가능성
 
 **해결 방안**
-- MongoDB의 `find_one_and_update()`와 `$expr` 연산자를 활용한 **원자적(Atomic) 업데이트**
+- MongoDB의 `find_one_and_update()`와 `${"$"}expr` 연산자를 활용한 **원자적(Atomic) 업데이트**
 
 **검증**
 - Python unittest 기반 동시성 테스트 코드 작성 (**500명 동시 참가 신청 시뮬레이션**)
