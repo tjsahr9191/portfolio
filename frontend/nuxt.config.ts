@@ -15,7 +15,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      apiBase: ''  // In production, Ingress proxies /api/* to backend
+      // In production, Ingress proxies /api/* to backend
+      apiBase: ''
     }
   },
 
