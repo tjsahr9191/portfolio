@@ -28,9 +28,11 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -91,8 +93,15 @@
 
 /* Typing Animation */
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
 
 .typing-cursor::after {
@@ -107,6 +116,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -118,11 +128,25 @@
 }
 
 /* Stagger animations */
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
-.stagger-4 { animation-delay: 0.4s; }
-.stagger-5 { animation-delay: 0.5s; }
+.stagger-1 {
+  animation-delay: 0.1s;
+}
+
+.stagger-2 {
+  animation-delay: 0.2s;
+}
+
+.stagger-3 {
+  animation-delay: 0.3s;
+}
+
+.stagger-4 {
+  animation-delay: 0.4s;
+}
+
+.stagger-5 {
+  animation-delay: 0.5s;
+}
 
 /* Timeline */
 .timeline-line {
@@ -141,9 +165,12 @@
 
 /* Floating animation for hero elements */
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
@@ -180,28 +207,178 @@ html {
 /* Hero section specific */
 .hero-gradient {
   background: radial-gradient(ellipse at top, rgba(0, 220, 130, 0.15) 0%, transparent 50%),
-              radial-gradient(ellipse at bottom right, rgba(35, 166, 213, 0.1) 0%, transparent 50%);
+    radial-gradient(ellipse at bottom right, rgba(35, 166, 213, 0.1) 0%, transparent 50%);
 }
 
 .dark .hero-gradient {
   background: radial-gradient(ellipse at top, rgba(0, 220, 130, 0.1) 0%, transparent 50%),
-              radial-gradient(ellipse at bottom right, rgba(35, 166, 213, 0.05) 0%, transparent 50%);
+    radial-gradient(ellipse at bottom right, rgba(35, 166, 213, 0.05) 0%, transparent 50%);
 }
 
 /* Prose styling for markdown content */
+.prose {
+  color: #e2e8f0;
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  color: #f8fafc;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.prose h2 {
+  font-size: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(0, 220, 130, 0.3);
+}
+
+.prose h3 {
+  font-size: 1.25rem;
+  color: #00DC82;
+}
+
+.prose p {
+  margin-bottom: 1rem;
+}
+
+.prose strong {
+  color: #00DC82;
+  font-weight: 600;
+}
+
+.prose ul,
+.prose ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+}
+
+.prose li::marker {
+  color: #00DC82;
+}
+
+/* Tables */
+.prose table {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.prose thead {
+  background: linear-gradient(90deg, rgba(0, 220, 130, 0.2), rgba(35, 166, 213, 0.2));
+}
+
+.prose th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #00DC82;
+  border-bottom: 2px solid rgba(0, 220, 130, 0.3);
+}
+
+.prose td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.prose tr:hover {
+  background: rgba(0, 220, 130, 0.05);
+}
+
+/* Images */
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Horizontal rules */
+.prose hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 220, 130, 0.5), transparent);
+  margin: 2rem 0;
+}
+
+/* Code blocks */
 .prose pre {
-  background: #1e1e1e;
+  background: #1a1a2e;
   border-radius: 8px;
   padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .prose code {
-  background: rgba(0, 0, 0, 0.1);
-  padding: 0.2rem 0.4rem;
+  background: rgba(0, 220, 130, 0.15);
+  color: #00DC82;
+  padding: 0.2rem 0.5rem;
   border-radius: 4px;
   font-size: 0.875em;
+  font-family: 'JetBrains Mono', monospace;
 }
 
-.dark .prose code {
-  background: rgba(255, 255, 255, 0.1);
+.prose pre code {
+  background: transparent;
+  padding: 0;
+  color: #e2e8f0;
+}
+
+/* Blockquotes */
+.prose blockquote {
+  border-left: 4px solid #00DC82;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* Links */
+.prose a {
+  color: #00DC82;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.prose a:hover {
+  color: #00A155;
+}
+
+/* Light mode adjustments */
+:not(.dark) .prose {
+  color: #374151;
+}
+
+:not(.dark) .prose h1,
+:not(.dark) .prose h2,
+:not(.dark) .prose h3,
+:not(.dark) .prose h4 {
+  color: #111827;
+}
+
+:not(.dark) .prose td {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+:not(.dark) .prose tr:hover {
+  background: rgba(0, 220, 130, 0.08);
+}
+
+:not(.dark) .prose img {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
