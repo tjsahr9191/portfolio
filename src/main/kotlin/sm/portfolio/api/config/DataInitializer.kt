@@ -176,7 +176,7 @@ class DataInitializer {
 
 ---
 
-## 2️⃣ SVD 기반 이미지 압축 원리
+## 2️⃣ 결론
 
 ![SVD Compression Result](/images/svd_2.png)
 
