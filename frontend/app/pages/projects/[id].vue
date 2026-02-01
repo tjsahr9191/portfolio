@@ -111,10 +111,12 @@ const formatDate = (date: string) => {
     <UPageSection>
       <div class="max-w-4xl mx-auto">
         <UCard class="overflow-hidden">
+          <!-- eslint-disable vue/no-v-html -->
           <div
             class="prose dark:prose-invert max-w-none"
             v-html="renderedContent"
           />
+          <!-- eslint-enable vue/no-v-html -->
         </UCard>
       </div>
     </UPageSection>

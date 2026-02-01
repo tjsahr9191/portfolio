@@ -73,7 +73,6 @@ useSeoMeta({
       </template>
 
       <template #right>
-
         <UButton
           to="https://github.com/tjsahr9191"
           target="_blank"
