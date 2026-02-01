@@ -449,7 +449,12 @@ RabbitMQ Consumer의 set_qos()에서 prefetch_count를 120으로 설정
 - **main 브랜치 push 시 자동으로 빌드 및 배포 완료**
 
 **특징**
-- docker-compose를 활용한 멀티 컨테이너 오케스트레이션 (Flask, MongoDB, Prometheus, Grafana)
+- docker-compose를 활용한 멀티 컨테이너 오케스트레이션 (Flask, MongoDB)
+- Prometheus/Grafana 모니터링 스택은 별도 EC2 인스턴스에서 운영
+
+**배운 점**
+- 안정화 버전(main)과 개발 버전(dev) 브랜치를 분리하여 관리해야 함을 깨달음
+- 개발 중 빈번한 배포로 서비스 중단 리스크 경험 → 브랜치 전략의 중요성 인식
 
 ---
 
