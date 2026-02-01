@@ -120,7 +120,7 @@ class DataInitializer {
 
 ## 🏗️ 시스템 아키텍처
 
-![시스템 아키텍처](/images/stolink 아키텍처.png)
+![시스템 아키텍처](/images/stolink%20아키텍처.png)
 
 ---
 
