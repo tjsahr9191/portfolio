@@ -257,7 +257,7 @@ html {
 .prose h3,
 .dark .prose h3 {
   font-size: 1.25rem;
-  color: #00DC82 !important;
+  color: #6EE7B7 !important;
 }
 
 .prose p {
@@ -265,7 +265,7 @@ html {
 }
 
 .prose strong {
-  color: #00DC82;
+  color: #6EE7B7;
   font-weight: 600;
 }
 
@@ -282,7 +282,7 @@ html {
 }
 
 .prose li::marker {
-  color: #00DC82;
+  color: #6EE7B7;
 }
 
 /* Tables */
