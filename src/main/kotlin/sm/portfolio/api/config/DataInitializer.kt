@@ -110,22 +110,125 @@ class DataInitializer {
                     Project(
                         title = "AI 에이전트 기반 웹 소설 작가 보조 서비스: Stolink",
                         description = "4단계 Agent Orchestration을 통한 웹 소설 분석 및 보조 서비스",
-                        content = """## 프로젝트 개요
-크래프톤 정글 최종 프로젝트로 기획부터 개발까지 전 과정 참여
+                        content = """## 🔍 프로젝트 소개
 
-## 주요 성과
-- **Agent Orchestration**: 추출·결합·분석·검증 4단계 Agent Orchestration 설계 및 개발
-- **성능 개선**: 추출 데이터 품질 유지하며 분석 속도 211.1s → 147.4s로 약 30% 단축
-- **문제 해결**: 장문 텍스트 분석 시 발생하는 문맥 손실 및 오류 해결
-- **중복 방지**: 동일 인물 중복 추출 방지 로직 구현
-- **비용 절감**: 불필요한 반복 분석 제거를 통한 API 호출 비용 절감
-- **대용량 처리**: 메시지 큐 prefetch count 튜닝으로 동시 처리량 12배 향상 (10 → 120)
-- **안정성 확보**: Redis Sorted Set·분산 락·ACK 기반 재전송으로 다중 문서의 처리 순서 보장
+**장편 소설 작가를 위한 캐릭터·이벤트·관계 자동 추출 및 개연성 검증 AI 엔진**
 
-## 기술 스택
-- **Backend**: Python, FastAPI, LangChain, RabbitMQ, Redis, PostgreSQL
-- **Frontend**: React, TypeScript
-- **Infra**: AWS (EC2, RDS)
+크래프톤 정글 최종 프로젝트로 기획부터 개발까지 전 과정 참여했습니다. 방대한 비정형 소설 데이터를 정형화하고 세계관 일관성을 자동 검증하는 AI 백엔드를 개발했습니다.
+
+---
+
+## 🏗️ 시스템 아키텍처
+
+![시스템 아키텍처](/images/stolink 아키텍처.png)
+
+---
+
+## 👨‍💻 역할 및 기간
+
+| 구분 | 내용 |
+|------|------|
+| 팀 구성 | 5인 팀 프로젝트 |
+| 개발 기간 | 2025. 12 ~ 2026. 01 |
+| 담당 역할 | AI/Backend 개발 |
+
+---
+
+## 🏆 주요 성과
+
+| 영역 | 성과 | 수치 |
+|------|------|------|
+| 분석 속도 | 하이브리드 병렬 실행 | **30% 단축** (211.1s → 147.4s) |
+| 동시 처리량 | prefetch_count 최적화 | **12배 향상** (10 → 120) |
+| API 비용 | 증분 분석 + 캐싱 + 티어링 | **70~90% 절감** (예상) |
+| 데이터 품질 | 3단계 Entity Resolution | 중복 캐릭터 자동 병합 |
+| 장문 분석 | Semantic Chunking + Context Rolling | 100% 분석 가능 |
+| 개연성 검증 | RAG (Vector + Keyword) | 설정 충돌 **90% 감지** |
+| 순서 보장 | Redis Sorted Set 분산 락 | 챕터 순서 보장 |
+
+---
+
+## 🤖 AI 개발
+
+### 1️⃣ 4단계 Agent Orchestration 설계 및 개발
+
+**문제**: 단일 LLM으로 소설 분석 시 **정보 누락**, **구조화 실패**, **품질 저하** 문제 발생
+
+**해결**: LangGraph 기반 **멀티 에이전트 파이프라인** 구축
+- **Phase 1 (EXTRACTION)**: Character Team, Setting Agent, Event Agent가 병렬로 캐릭터/배경/사건 추출
+- **Phase 2 (RESOLUTION)**: Global Resolution에서 Fuzzy Matching으로 중복 캐릭터 병합
+- **Phase 3 (ANALYSIS)**: Relationship Agent와 Consistency Agent가 병렬로 관계 추론 및 개연성 검사
+- **Phase 4 (VALIDATION)**: Validator Agent가 품질 검증 후 필요 시 재추출 결정 (Feedback Loop)
+
+---
+
+### 2️⃣ 하이브리드 병렬 실행으로 분석 속도 30% 단축
+
+**문제**: 순차 실행 시 각 에이전트의 LLM 호출 대기 시간 누적
+
+**해결**: 의존성 분석 기반 **하이브리드 병렬 실행** 전략
+- `asyncio.gather()`로 독립적인 에이전트들을 동시 실행
+- 의존성이 있는 Event Agent는 Phase 1 완료 후 순차 실행
+
+**성과**: 분석 시간 211.1초 → **147.4초** (30.2% 단축)
+
+---
+
+### 3️⃣ 장문 텍스트 분석 시 문맥 손실 해결
+
+**문제**: LLM 토큰 제한으로 장편 소설 전체를 한 번에 분석 불가
+
+**해결**: **Semantic Chunking** + **Context Rolling**
+- 빈 줄 기준 단락 분리 → Gemini Embedding으로 임베딩 생성
+- 인접 단락 간 코사인 유사도 ≥ 0.6이면 병합
+- 이전 배치에서 추출된 정보를 다음 배치의 컨텍스트로 전달
+
+**효과**: 해리포터 전권 수준 **100% 분석 가능**
+
+---
+
+### 4️⃣ 동일 인물 중복 추출 방지 로직
+
+**문제**: LLM이 같은 캐릭터를 다른 표현으로 추출 (예: "리안", "마법사 리안", "Lian")
+
+**해결**: **3단계 Entity Resolution** + **Union-Find 클러스터링**
+
+| 점수 | 분류 | 동작 |
+|------|------|------|
+| ≥ 95 | AUTO_MERGE | 자동 병합 |
+| 80-94 | NEEDS_REVIEW | 검토 필요 플래그 |
+| < 80 | DIFFERENT | 별개 캐릭터 |
+
+---
+
+## 🔧 Backend 개발
+
+### 1️⃣ prefetch count 튜닝으로 동시 처리량 12배 향상
+
+**문제**: 기본 prefetch_count=10 설정으로 메모리 35%만 활용
+
+**해결**: 부하 테스트 기반 **prefetch_count 최적화**
+
+| Prefetch | 메모리 사용 | 상태 |
+|----------|------------|------|
+| 10 | 625MB (35%) | ⚡ 기본값 (비효율) |
+| 100 | 1.28GB (71%) | ✅ 최적 |
+| **120** | **~1.4GB (78%)** | 🎯 **Sweet Spot** |
+| 150 | 1.63GB (91%) | ⚠️ 한계 |
+
+---
+
+### 2️⃣ Redis Sorted Set 기반 순서 보장 분산 락
+
+**문제**: 같은 프로젝트의 챕터들이 순서 무관하게 병렬 처리되면 **문맥 일관성 파괴**
+
+**해결**: **Redis Sorted Set 기반 순서 보장 분산 락**
+1. **ZADD**: Sorted Set에 job 등록 (score = document_order)
+2. **ZRANK**: 내 순위 조회 (rank = 0이면 내 차례)
+3. **SET NX EX**: 락 획득 시도 (10분 TTL로 데드락 방지)
+4. **DELETE + ZREM**: 처리 완료 후 락 해제 및 큐에서 제거
+
+**ACK 기반 재전송**: Spring → AI Backend로 전송 후 5분 타임아웃 시 최대 3회 재전송
 """,
                         startDate = LocalDate.of(2025, 12, 1),
                         endDate = LocalDate.of(2026, 1, 31),
