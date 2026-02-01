@@ -8,17 +8,17 @@ export default defineNuxtConfig({
 
   ssr: false,
 
-  colorMode: {
-    preference: 'dark',
-    fallback: 'dark',
-    classSuffix: ''
-  },
-
   devtools: {
     enabled: true
   },
 
   css: ['~/assets/css/main.css'],
+
+  colorMode: {
+    preference: 'dark',
+    fallback: 'dark',
+    classSuffix: ''
+  },
 
   runtimeConfig: {
     public: {
