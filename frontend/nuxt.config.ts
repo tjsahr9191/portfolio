@@ -15,7 +15,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      apiBase: 'http://localhost:8080'
+      apiBase: ''  // In production, Ingress proxies /api/* to backend
     }
   },
 
