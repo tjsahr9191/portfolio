@@ -370,24 +370,108 @@ RabbitMQ Consumer의 set_qos()에서 prefetch_count를 120으로 설정
                     Project(
                         title = "농구 코트 예약 시스템: Court-Kok",
                         description = "동시성 문제를 해결한 실시간 농구 코트 예약 서비스",
-                        content = """## 프로젝트 개요
-크래프톤 정글 첫 프로젝트로 3일간 서비스 개발 및 배포
+                        content = """## 🔍 프로젝트 소개
 
-## 주요 성과
-- **성능 튜닝**: 워커 수 튜닝으로 예약 API 처리량 60 TPS → 220 TPS로 약 3.5배 개선
-- **실시간성**: WebSocket 통신으로 예약 현황 실시간 반영 구현
-- **CI/CD**: GitHub Actions를 통한 CI/CD 파이프라인 구축
-- **동시성 해결**: 테스트 코드 기반 동시성 문제 해결
+크래프톤 정글 첫 프로젝트로 **3일간 서비스 개발 및 배포**를 완료한 프로젝트입니다.
 
-## 기술 스택
-- **Backend**: Spring Boot, JPA, MySQL, Redis
-- **Frontend**: thymeleaf, JavaScript
+---
+
+## 🏗️ 시스템 아키텍처
+
+![시스템 아키텍처](/images/court-kok-architecture.png)
+
+---
+
+## 👨‍💻 역할 및 기간
+
+| 구분 | 내용 |
+|------|------|
+| 팀 구성 | 5인 팀 프로젝트 |
+| 개발 기간 | 2025. 09 (3일) |
+| 담당 역할 | Backend 개발 |
+
+---
+
+## 🏆 주요 성과
+
+| 항목 | 개선 결과 |
+|------|-----------|
+| 예약 API 처리량 | **60 TPS → 220 TPS** (약 3.5배 개선) |
+| 실시간성 | WebSocket 기반 즉시 반영 |
+| 배포 자동화 | GitHub Actions CI/CD 구축 |
+| 동시성 제어 | 원자적 업데이트로 Race Condition 해결 |
+
+---
+
+## 🔧 기술적 도전 및 구현
+
+### 1️⃣ 성능 튜닝으로 API 처리량 3.5배 개선
+
+**문제 상황**
+- 단일 워커 기반 Flask 서버에서 예약 API 처리량이 **60 TPS**에 불과
+
+**해결 방안**
+- Gunicorn **워커 수** 및 **worker-class(gevent)** 튜닝을 통한 최적화
+
+**결과**
+- 예약 API 처리량 60 TPS → **220 TPS**로 약 **3.5배 개선**
+
+**검증**
+- k6 부하 테스트 스크립트를 작성하여 **6,000 VU** 기반 성능 측정
+- Prometheus/Grafana를 통한 모니터링
+
+![k6 부하 테스트 결과](/images/court-kok-stress.png)
+
+---
+
+### 2️⃣ WebSocket 기반 실시간 예약 현황 반영
+
+**문제 상황**
+- 기존 HTTP 폴링 방식은 서버 부하 증가 및 실시간성 부족
+
+**해결 방안**
+- **Flask-Sock**을 활용한 WebSocket 통신 구현
+
+**결과**
+- 예약 생성/취소/참가 시 연결된 모든 클라이언트에 **실시간 브로드캐스팅**
+
+**구현**
+- `broadcast_event_update()` 함수를 통해 특정 날짜의 이벤트 변경 시 즉시 UI 반영
+
+---
+
+### 3️⃣ GitHub Actions 기반 CI/CD 파이프라인 구축
+
+**구성**
+- GitHub Actions → Docker 이미지 빌드 → Amazon ECR 푸시 → EC2 자동 배포
+
+**결과**
+- **main 브랜치 push 시 자동으로 빌드 및 배포 완료**
+
+**특징**
+- docker-compose를 활용한 멀티 컨테이너 오케스트레이션 (Flask, MongoDB, Prometheus, Grafana)
+
+---
+
+### 4️⃣ 테스트 코드 기반 동시성 문제 해결
+
+**문제 상황**
+- 다수의 사용자가 동시에 예약 신청 시 **Race Condition** 발생 가능성
+
+**해결 방안**
+- MongoDB의 `find_one_and_update()`와 `$expr` 연산자를 활용한 **원자적(Atomic) 업데이트**
+
+**검증**
+- Python unittest 기반 동시성 테스트 코드 작성 (**500명 동시 참가 신청 시뮬레이션**)
+
+**결과**
+- 최대 정원 초과 없이 **정확히 정원만큼만 참가 성공** 확인
 """,
                         startDate = LocalDate.of(2025, 9, 1),
                         endDate = LocalDate.of(2025, 9, 30),
                         isActive = true,
                         thumbnailUrl = "/images/court-kok.png",
-                        techStack = mutableListOf("Spring Boot", "JPA", "MySQL", "Redis", "WebSocket", "GitHub Actions"),
+                        techStack = mutableListOf("Flask", "MongoDB", "WebSocket", "Docker", "GitHub Actions", "Prometheus"),
                         featured = true
                     ),
                     Project(
