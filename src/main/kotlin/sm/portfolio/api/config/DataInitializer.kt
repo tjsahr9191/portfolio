@@ -60,6 +60,12 @@ class DataInitializer {
 
 ---
 
+## 🏗️ 시스템 아키텍처
+
+![시스템 아키텍처](/images/portfolio-architecture.png)
+
+---
+
 ## 👨‍💻 역할 및 기간
 
 | 구분 | 내용 |
