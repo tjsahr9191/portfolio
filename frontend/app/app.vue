@@ -73,7 +73,6 @@ useSeoMeta({
       </template>
 
       <template #right>
-        <UColorModeButton />
 
         <UButton
           to="https://github.com/tjsahr9191"

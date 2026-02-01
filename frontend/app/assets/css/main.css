@@ -216,31 +216,48 @@ html {
 }
 
 /* Prose styling for markdown content */
-.prose {
-  color: #e2e8f0;
+.prose,
+.dark .prose {
+  color: #e2e8f0 !important;
   line-height: 1.8;
   font-size: 1rem;
+}
+
+
+
+.dark .prose p,
+.dark .prose li,
+.dark .prose td,
+.dark .prose span {
+  color: #e2e8f0 !important;
 }
 
 .prose h1,
 .prose h2,
 .prose h3,
-.prose h4 {
+.prose h4,
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4 {
   color: #f8fafc;
   font-weight: 700;
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
 
-.prose h2 {
+.prose h2,
+.dark .prose h2 {
   font-size: 1.5rem;
   padding-bottom: 0.5rem;
   border-bottom: 2px solid rgba(0, 220, 130, 0.3);
+  color: #f8fafc !important;
 }
 
-.prose h3 {
+.prose h3,
+.dark .prose h3 {
   font-size: 1.25rem;
-  color: #00DC82;
+  color: #00DC82 !important;
 }
 
 .prose p {
@@ -258,8 +275,10 @@ html {
   padding-left: 1.5rem;
 }
 
-.prose li {
+.prose li,
+.dark .prose li {
   margin-bottom: 0.5rem;
+  color: #ffffff;
 }
 
 .prose li::marker {
@@ -287,9 +306,11 @@ html {
   border-bottom: 2px solid rgba(0, 220, 130, 0.3);
 }
 
-.prose td {
+.prose td,
+.dark .prose td {
   padding: 0.75rem 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
 }
 
 .prose tr:hover {
@@ -356,29 +377,4 @@ html {
 
 .prose a:hover {
   color: #00A155;
-}
-
-/* Light mode adjustments */
-:not(.dark) .prose {
-  color: #374151;
-}
-
-:not(.dark) .prose h1,
-:not(.dark) .prose h2,
-:not(.dark) .prose h3,
-:not(.dark) .prose h4 {
-  color: #111827;
-}
-
-:not(.dark) .prose td {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-:not(.dark) .prose tr:hover {
-  background: rgba(0, 220, 130, 0.08);
-}
-
-:not(.dark) .prose img {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.1);
 }
