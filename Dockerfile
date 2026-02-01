@@ -1,6 +1,8 @@
-# Multi-stage build for Spring Boot Backend
-# Stage 1: Build
-FROM gradle:8.11-jdk21 AS builder
+# Cross-platform build for Spring Boot Backend
+# Uses native x86 builder for Gradle, then copies to ARM64 runtime
+
+# Stage 1: Build on native x86 (no QEMU emulation - FAST!)
+FROM --platform=$BUILDPLATFORM gradle:8.11-jdk21 AS builder
 
 WORKDIR /app
 
@@ -14,10 +16,10 @@ RUN gradle dependencies --no-daemon || true
 # Copy source code
 COPY src ./src
 
-# Build the application
+# Build the application (runs on x86, produces platform-independent JAR)
 RUN gradle bootJar --no-daemon -x test
 
-# Stage 2: Runtime
+# Stage 2: Runtime (ARM64 target)
 FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
@@ -26,7 +28,7 @@ WORKDIR /app
 RUN addgroup -g 1001 appgroup && \
     adduser -u 1001 -G appgroup -D appuser
 
-# Copy built jar from builder stage
+# Copy built jar from builder stage (JAR is platform-independent!)
 COPY --from=builder /app/build/libs/*.jar app.jar
 
 # Change ownership

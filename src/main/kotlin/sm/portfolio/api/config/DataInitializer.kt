@@ -1,15 +1,17 @@
 package sm.portfolio.api.config
 
+import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.context.annotation.Profile
 import sm.portfolio.api.domain.*
 import sm.portfolio.api.repository.*
 import java.time.LocalDate
 
 @Configuration
 class DataInitializer {
+
+    private val logger = LoggerFactory.getLogger(DataInitializer::class.java)
 
     @Bean
     fun initData(
@@ -23,8 +25,12 @@ class DataInitializer {
         languageSkillRepository: LanguageSkillRepository,
         activityRepository: ActivityRepository
     ) = CommandLineRunner {
+        logger.info("========== DataInitializer STARTED ==========")
+        
         // Personal Info
+        logger.info("Deleting all personal info...")
         personalInfoRepository.deleteAll()
+        logger.info("Saving personal info...")
         personalInfoRepository.save(
             PersonalInfo(
                 name = "유선목",
