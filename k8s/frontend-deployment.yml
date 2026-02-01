@@ -30,7 +30,7 @@ spec:
             - name: NODE_ENV
               value: "production"
             - name: NUXT_PUBLIC_API_BASE
-              value: "http://portfolio-backend:8080"
+              value: ""
           resources:
             requests:
               memory: "256Mi"
