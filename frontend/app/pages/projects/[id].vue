@@ -56,7 +56,7 @@ watchEffect(() => {
 
   const matches = [...project.value.content.matchAll(/^(#{1,3})\s+(.+)$/gm)]
   toc.value = matches.map((match) => {
-    const level = match[1].length
+    const level = match[1]?.length || 0
     const text = match[2] || ''
     const id = text
       .toLowerCase()
