@@ -8,6 +8,23 @@ const md = new MarkdownIt({
   linkify: true,
   typographer: true
 })
+
+// Customize renderer to add IDs to headings for linking
+md.renderer.rules.heading_open = (tokens, idx) => {
+  const token = tokens[idx]
+  const contentToken = tokens[idx + 1]
+  const title = contentToken.content
+
+  // Create a simple ID: remove special chars, spaces to hyphens, lowercase
+  const slug = title
+    .toLowerCase()
+    .replace(/[^\w\s-가-힣]/g, '') // Keep Korean, alphanumeric, spaces, hyphens
+    .trim()
+    .replace(/\s+/g, '-')
+
+  return `<h${token.tag.slice(1)} id="${slug}">`
+}
+
 const config = useRuntimeConfig()
 
 const { data: project } = await useFetch<Project>(`/api/v1/projects/${route.params.id}`, {
@@ -26,58 +43,17 @@ interface TocItem {
 const toc = ref<TocItem[]>([])
 const activeId = ref<string>('')
 
-// Render content and extract TOC
+// Render content
 const renderedContent = computed(() => {
-  if (!project.value) return ''
-  
-  // Custom renderer to add IDs to headings for linking
-  const content = project.value.content
-  const headings: TocItem[] = []
-  
-  // Basic regex to find headings (simplified for client-side extraction)
-  // Matching # Heading, ## Heading, etc.
-  const headingRegex = /^(#{1,3})\s+(.+)$/gm
-  let match
-  
-  // We need to inject IDs into the rendered HTML. 
-  // Markdown-it allows custom rules, but for simplicity with the current setup, 
-  // let's regex-replace the source or use a plugin. 
-  // Here, we'll try to extract them first.
-  
-  // A better approach without plugins is to parse logic:
-  // 1. Render markdown
-  // 2. Client-side DOM extraction (onMounted) OR custom markdown-it render rule.
-  
-  // Let's use custom markdown-it render rule to inject IDs
-  md.renderer.rules.heading_open = (tokens, idx) => {
-    const token = tokens[idx]
-    const contentToken = tokens[idx + 1]
-    const title = contentToken.content
-    
-    // Create a simple ID: remove special chars, spaces to hyphens, lowercase
-    const slug = title
-      .toLowerCase()
-      .replace(/[^\w\s-가-힣]/g, '') // Keep Korean, alphanumeric, spaces, hyphens
-      .trim()
-      .replace(/\s+/g, '-')
-    
-    // Store in TOC array (using a temporary way to capture this during render)
-    // Note: computed properties shouldn't have side effects ideally, but this runs on render.
-    // However, Vue's reactivity might trigger this multiple times. 
-    // Safer to just use the slug for the ID attribute.
-    
-    return `<h${token.tag.slice(1)} id="${slug}">`
-  }
-  
-  return md.render(project.value.content)
+  return project.value ? md.render(project.value.content) : ''
 })
 
 // Extract TOC on mount/update based on content
 watchEffect(() => {
   if (!project.value?.content) return
-  
+
   const matches = [...project.value.content.matchAll(/^(#{1,3})\s+(.+)$/gm)]
-  toc.value = matches.map(match => {
+  toc.value = matches.map((match) => {
     const level = match[1].length
     const text = match[2]
     const id = text
@@ -85,7 +61,7 @@ watchEffect(() => {
       .replace(/[^\w\s-가-힣]/g, '')
       .trim()
       .replace(/\s+/g, '-')
-      
+
     return { id, text, level }
   })
 })
@@ -93,7 +69,7 @@ watchEffect(() => {
 // Scroll handling for active state
 onMounted(() => {
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         activeId.value = entry.target.id
       }
@@ -102,7 +78,7 @@ onMounted(() => {
 
   // Observe all headings
   setTimeout(() => {
-    toc.value.forEach(item => {
+    toc.value.forEach((item) => {
       const el = document.getElementById(item.id)
       if (el) observer.observe(el)
     })
@@ -116,7 +92,7 @@ const scrollToSection = (id: string) => {
     const offset = 80 // header height approx
     const elementPosition = el.getBoundingClientRect().top
     const offsetPosition = elementPosition + window.pageYOffset - offset
-    
+
     window.scrollTo({
       top: offsetPosition,
       behavior: 'smooth'
@@ -125,11 +101,10 @@ const scrollToSection = (id: string) => {
   }
 }
 
-
 // Find prev/next projects
 const currentIndex = computed(() => {
   if (!allProjects.value || !project.value) return -1
-  return allProjects.value.findIndex(p => p.id === project.value!.id)
+  return allProjects.value.findIndex((p) => p.id === project.value!.id)
 })
 
 const prevProject = computed(() => {
@@ -220,7 +195,6 @@ const formatDate = (date: string) => {
     <UPageSection>
       <!-- Layout Container -->
       <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 px-4 sm:px-6 lg:px-8">
-        
         <!-- Main Content (Left, 9 cols) -->
         <div class="lg:col-span-9">
           <UCard class="overflow-hidden">
@@ -238,32 +212,32 @@ const formatDate = (date: string) => {
           <div class="sticky top-24 space-y-4">
             <div class="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
               <h3 class="font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                <UIcon name="i-lucide-list" class="w-4 h-4" />
+                <UIcon
+                  name="i-lucide-list"
+                  class="w-4 h-4"
+                />
                 목차
               </h3>
               <nav class="space-y-1">
                 <button
                   v-for="item in toc"
                   :key="item.id"
-                  @click="scrollToSection(item.id)"
                   class="block text-sm text-left w-full truncate py-1.5 transition-colors border-l-2 px-3"
                   :class="[
-                    activeId === item.id 
-                      ? 'border-primary-500 text-primary-600 dark:text-primary-400 font-medium bg-primary-50 dark:bg-primary-900/10' 
+                    activeId === item.id
+                      ? 'border-primary-500 text-primary-600 dark:text-primary-400 font-medium bg-primary-50 dark:bg-primary-900/10'
                       : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600',
                     item.level === 2 ? 'pl-3' : '',
                     item.level === 3 ? 'pl-6' : ''
                   ]"
+                  @click="scrollToSection(item.id)"
                 >
                   {{ item.text }}
                 </button>
               </nav>
             </div>
-            
-            <!-- Share / Extra links could go here -->
           </div>
         </aside>
-
       </div>
     </UPageSection>
 
@@ -287,7 +261,9 @@ const formatDate = (date: string) => {
                     class="w-6 h-6 text-gray-400 group-hover:text-primary-500 transition-colors"
                   />
                   <div>
-                    <p class="text-sm text-gray-500 dark:text-gray-400">이전 프로젝트</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                      이전 프로젝트
+                    </p>
                     <p class="font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 transition-colors">
                       {{ prevProject.title }}
                     </p>
@@ -310,7 +286,9 @@ const formatDate = (date: string) => {
               <UCard class="h-full card-hover">
                 <div class="flex items-center justify-end gap-4 text-right">
                   <div>
-                    <p class="text-sm text-gray-500 dark:text-gray-400">다음 프로젝트</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                      다음 프로젝트
+                    </p>
                     <p class="font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 transition-colors">
                       {{ nextProject.title }}
                     </p>
