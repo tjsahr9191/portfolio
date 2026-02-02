@@ -223,7 +223,7 @@ const formatDate = (date: string) => {
         <!-- Sidebar (Right, 3 cols) - Hidden on Mobile -->
         <aside class="hidden lg:block lg:col-span-3">
           <div class="sticky top-24 space-y-4">
-            <div class="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+            <div class="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-4 border border-gray-200 dark:border-gray-700 max-h-[calc(100vh-8rem)] overflow-y-auto custom-scrollbar">
               <h3 class="font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                 <UIcon
                   name="i-lucide-list"
