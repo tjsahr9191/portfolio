@@ -26,7 +26,7 @@ const parsedData = computed(() => {
   if (!project.value) return { html: '', toc: [] }
 
   const tokens = md.parse(project.value.content, {})
-  const tocList: { id: string; text: string; level: number }[] = []
+  const tocList: { id: string, text: string, level: number }[] = []
   const seenIds = new Map<string, number>()
 
   tokens.forEach((token, idx) => {
@@ -40,7 +40,7 @@ const parsedData = computed(() => {
         .replace(/[^\w\s-가-힣]/g, '') // Keep Korean, alphanumeric, spaces, hyphens
         .trim()
         .replace(/\s+/g, '-')
-      
+
       // Fallback for empty slug (e.g. only emojis)
       if (!slug) slug = `section-${idx}`
 
@@ -75,7 +75,7 @@ const parsedData = computed(() => {
 onMounted(() => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      // Logic: if intersecting, set active. 
+      // Logic: if intersecting, set active.
       // If leaving intersection, we might want to check which one is currently visible or closest to top.
       // Simple approach: set active when intersecting.
       if (entry.isIntersecting) {
