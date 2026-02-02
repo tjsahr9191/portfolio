@@ -49,6 +49,64 @@ class DataInitializer {
         projectRepository.deleteAll()
         projectRepository.saveAll(
                 listOf(
+                    Project(
+                        title = "인프라 구축 및 포트폴리오 개발",
+                        description = "Kotlin과 Kubernetes 학습을 위해 3일간 집중 개발하여 배포한 풀스택 프로젝트",
+                        content = """## 🔍 프로젝트 소개
+
+**자신의 기술적 한계를 넓히기 위해, 익숙하지 않은 Kotlin과 Kubernetes를 3일(26.01.30 ~ 26.02.01)이라는 짧은 기간 동안 집중적으로 학습하고 이를 실제 운영 환경에 배포까지 성공시킨 프로젝트입니다.**
+
+단순한 기능 구현을 넘어, **Spring Boot 3 + Kotlin** 기반의 백엔드 아키텍처를 설계하고, **GitHub Actions**와 **K3s(경량 Kubernetes)** 를 활용해 CI/CD 파이프라인부터 SSL 보안 적용까지 완전한 자동화 배포 환경을 구축했습니다.
+
+---
+
+## 🏗️ 시스템 아키텍처
+
+![시스템 아키텍처](/images/portfolio-architecture.png)
+
+---
+
+## 👨‍💻 역할 및 기간
+
+| 구분 | 내용 |
+|------|------|
+| 프로젝트 유형 | 개인 프로젝트 |
+| 개발 기간 | 2026. 01. 30 ~ 2026. 02. 01 (3일) |
+| 담당 역할 | 풀스택 개발 및 인프라 구축 (1인 개발) |
+
+---
+
+## 🏆 주요 성과
+
+- **초단기 신기술 도입 및 적용**: 3일 만에 Kotlin 문법 숙지부터 백엔드 개발, K3s 클러스터 구축까지 완료
+- **완전 자동화된 배포 시스템 구축**: GitHub Actions를 통해 코드 푸시부터 배포까지 원클릭 파이프라인 구현
+- **보안 및 안정성 확보**: cert-manager와 Let's Encrypt를 연동하여 SSL 인증서 자동 발급 및 갱신 체계 구축
+
+---
+
+## 🛠 기술적 도전 및 구현
+
+### 1️⃣ Kotlin & Spring Boot 3 백엔드 개발
+- **Java 대비 간결한 문법 활용**: Data Class, Smart Cast, Null Safety 등 Kotlin 고유 기능을 통해 코드 생산성 향상
+- **Clean Architecture 지향**: DTO와 Entity 분리, 계층형 아키텍처 설계를 통한 유지보수성 확보
+
+### 2️⃣ Kubernetes (K3s) 인프라 구축
+- 리소스 효율성을 고려하여 경량화된 K3s 클러스터 도입
+- Deployment, Service, Ingress 등 K8s 리소스를 직접 정의하고 관리
+
+### 3️⃣ CI/CD & DevOps
+- **GitHub Actions**: 빌드, 컨테이너 이미지 생성(Docker), 배포 프로세스 자동화
+- **SSL/TLS**: cert-manager를 활용한 HTTPS 보안 통신 적용
+""",
+                        repoUrl = "https://github.com/tjsahr9191/portfolio",
+                        demoUrl = "https://numkyelee.store",
+                        startDate = LocalDate.of(2026, 1, 30),
+                        endDate = LocalDate.of(2026, 2, 1),
+                        isActive = true,
+                        thumbnailUrl = "/images/portfolio-logo.png",
+                        techStack = mutableListOf("Kotlin", "Spring Boot 3", "Kubernetes", "K3s", "GitHub Actions", "Nuxt 3"),
+                        featured = true
+                    ),
 
                     Project(
                         title = "AI 에이전트 기반 웹 소설 작가 보조 서비스: Stolink",
