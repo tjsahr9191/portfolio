@@ -13,7 +13,9 @@ const md = new MarkdownIt({
 md.renderer.rules.heading_open = (tokens, idx) => {
   const token = tokens[idx]
   const contentToken = tokens[idx + 1]
-  const title = contentToken.content
+  const title = contentToken?.content || ''
+
+  if (!token) return ''
 
   // Create a simple ID: remove special chars, spaces to hyphens, lowercase
   const slug = title
@@ -53,9 +55,9 @@ watchEffect(() => {
   if (!project.value?.content) return
 
   const matches = [...project.value.content.matchAll(/^(#{1,3})\s+(.+)$/gm)]
-  toc.value = matches.map((match) => {
+  toc.value = matches.map(match => {
     const level = match[1].length
-    const text = match[2]
+    const text = match[2] || ''
     const id = text
       .toLowerCase()
       .replace(/[^\w\s-가-힣]/g, '')
@@ -68,8 +70,8 @@ watchEffect(() => {
 
 // Scroll handling for active state
 onMounted(() => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
         activeId.value = entry.target.id
       }
@@ -78,7 +80,7 @@ onMounted(() => {
 
   // Observe all headings
   setTimeout(() => {
-    toc.value.forEach((item) => {
+    toc.value.forEach(item => {
       const el = document.getElementById(item.id)
       if (el) observer.observe(el)
     })
@@ -104,7 +106,7 @@ const scrollToSection = (id: string) => {
 // Find prev/next projects
 const currentIndex = computed(() => {
   if (!allProjects.value || !project.value) return -1
-  return allProjects.value.findIndex((p) => p.id === project.value!.id)
+  return allProjects.value.findIndex(p => p.id === project.value!.id)
 })
 
 const prevProject = computed(() => {
