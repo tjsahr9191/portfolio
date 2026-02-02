@@ -10,6 +10,7 @@ data:
   SPRING_PROFILES_ACTIVE: "prod"
   DB_PORT: "3306"
   DB_NAME: "portfolio"
+  DB_HOST: "ysm-k3s-portfolio-database.cfc2w4g2ahag.ap-northeast-2.rds.amazonaws.com"
   
   # Frontend configuration
   NODE_ENV: "production"
