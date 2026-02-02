@@ -71,6 +71,26 @@ const parsedData = computed(() => {
   }
 })
 
+// Scroll TOC into view when activeId changes
+watch(activeId, (newId) => {
+  if (!newId) return
+
+  const sidebar = document.getElementById('toc-sidebar')
+  const activeItem = document.getElementById(`toc-item-${newId}`)
+
+  if (sidebar && activeItem) {
+    const sidebarRect = sidebar.getBoundingClientRect()
+    const itemRect = activeItem.getBoundingClientRect()
+
+    // Check if item is out of view
+    if (itemRect.top < sidebarRect.top || itemRect.bottom > sidebarRect.bottom) {
+      // Scroll to center the item
+      const scrollTop = activeItem.offsetTop - sidebar.clientHeight / 2 + activeItem.clientHeight / 2
+      sidebar.scrollTo({ top: scrollTop, behavior: 'smooth' })
+    }
+  }
+})
+
 // Scroll handling for active state
 onMounted(() => {
   const observer = new IntersectionObserver((entries) => {
@@ -223,7 +243,10 @@ const formatDate = (date: string) => {
         <!-- Sidebar (Right, 3 cols) - Hidden on Mobile -->
         <aside class="hidden lg:block lg:col-span-3">
           <div class="sticky top-24 space-y-4">
-            <div class="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-4 border border-gray-200 dark:border-gray-700 max-h-[calc(100vh-8rem)] overflow-y-auto custom-scrollbar">
+            <div
+              id="toc-sidebar"
+              class="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-4 border border-gray-200 dark:border-gray-700 max-h-[calc(100vh-8rem)] overflow-y-auto custom-scrollbar"
+            >
               <h3 class="font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                 <UIcon
                   name="i-lucide-list"
@@ -235,6 +258,7 @@ const formatDate = (date: string) => {
                 <button
                   v-for="item in parsedData.toc"
                   :key="item.id"
+                  :id="`toc-item-${item.id}`"
                   class="block text-sm text-left w-full truncate py-1.5 transition-colors border-l-2 px-3"
                   :class="[
                     activeId === item.id
