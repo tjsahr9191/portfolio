@@ -361,11 +361,13 @@ RabbitMQ Consumer의 set_qos()에서 prefetch_count를 120으로 설정
 3. Spring이 Callback 수신 시 markCompleted() 호출
 4. RetransmitScheduler가 5분 타임아웃 시 재전송 (최대 3회)
 """,
+                        repoUrl = "https://github.com/stolink",
+                        demoUrl = "https://numkyelee.store",
                         startDate = LocalDate.of(2025, 12, 1),
                         endDate = LocalDate.of(2026, 1, 31),
                         isActive = true,
                         thumbnailUrl = "/images/stolink.png",
-                        techStack = mutableListOf("Python", "FastAPI", "LangChain", "RabbitMQ", "Redis", "PostgreSQL", "AWS"),
+                        techStack = mutableListOf("Java", "SpringBoot", "JPA", "SpringDataJpa", "QueryDSL", "Python", "FastAPI", "PostgreSQL", "Neo4j", "Redis", "LangGraph", "RabbitMQ", "AWS EC2", "AWS RDS", "AWS Bedrock", "AWS CloudWatch", "htop", "Docker", "GEMINI API"),
                         featured = true
                     ),
                     Project(
@@ -477,7 +479,7 @@ RabbitMQ Consumer의 set_qos()에서 prefetch_count를 120으로 설정
                         endDate = LocalDate.of(2025, 9, 30),
                         isActive = true,
                         thumbnailUrl = "/images/court-kok.png",
-                        techStack = mutableListOf("Flask", "MongoDB", "WebSocket", "Docker", "GitHub Actions", "Prometheus"),
+                        techStack = mutableListOf("Flask", "MongoDB", "WebSocket", "Docker", "GitHub Actions", "Prometheus", "AWS EC2", "AWS CloudWatch", "Grafana"),
                         featured = true
                     ),
                     Project(
@@ -544,7 +546,7 @@ RabbitMQ Consumer의 set_qos()에서 prefetch_count를 120으로 설정
                         endDate = LocalDate.of(2024, 6, 30),
                         isActive = true,
                         thumbnailUrl = "/images/svd.png",
-                        techStack = mutableListOf("Python", "NumPy", "OpenCV", "Multi-threading"),
+                        techStack = mutableListOf("Python", "NumPy"),
                         featured = true
                     ),
                     Project(
@@ -732,7 +734,7 @@ Canny 알고리즘과 허프 변환을 통해 라벨의 기울어진 각도를 �
                         endDate = LocalDate.of(2024, 5, 31),
                         isActive = true,
                         thumbnailUrl = "/images/canon.png",
-                        techStack = mutableListOf("Python", "PyTorch", "OpenCV", "CNN", "Design Patterns"),
+                        techStack = mutableListOf("Python", "PyTorch", "OpenCV", "CNN", "Flask"),
                         featured = true
                     ),
                     Project(
@@ -846,7 +848,7 @@ orderDetailRepository.saveAll(orderDetails);
 
 **분석**:
 - Order Server 커넥션 부족 재확인
-- CPU 사용률 90%
+- CPU, 메모리는 정상
 - RDS에 24개 커넥션 요청
 
 **결론**: 커넥션 풀이 여전히 부족
@@ -968,7 +970,7 @@ orderDetailRepository.saveAll(orderDetails);
                         endDate = LocalDate.of(2024, 2, 29),
                         isActive = true,
                         thumbnailUrl = "/images/마켓브릿지.png",
-                        techStack = mutableListOf("Spring Boot", "JPA", "MySQL", "Redis", "ShedLock", "Spring REST Docs"),
+                        techStack = mutableListOf("Spring Boot", "Spring Security", "Spring Data JPA", "QueryDSL", "JUnit5", "MySQL", "Redis", "H2", "AWS S3", "AWS EC2", "Docker", "Spring REST Docs", "Jenkins", "k6", "Prometheus", "Grafana", "AWS CloudWatch"),
                         featured = true
                     )
                 )
