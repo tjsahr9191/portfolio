@@ -241,7 +241,8 @@ const formatDate = (date: string) => {
                       ? 'border-primary-500 text-primary-600 dark:text-primary-400 font-medium bg-primary-50 dark:bg-primary-900/10'
                       : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600',
                     item.level === 2 ? 'pl-3' : '',
-                    item.level === 3 ? 'pl-6' : ''
+                    item.level === 3 ? 'pl-6' : '',
+                    item.level >= 4 ? 'pl-9' : ''
                   ]"
                   @click="scrollToSection(item.id)"
                 >
