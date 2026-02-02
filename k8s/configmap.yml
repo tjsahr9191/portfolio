@@ -17,4 +17,4 @@ data:
   
   # AWS/ECR configuration (replace with your values)
   AWS_REGION: "ap-northeast-2"
-  ECR_REGISTRY: "147100278252.dkr.ecr.ap-northeast-2.amazonaws.com/ysm-k3s-portfolio-ecr"
+  ECR_REGISTRY: "147100278252.dkr.ecr.ap-northeast-2.amazonaws.com"
