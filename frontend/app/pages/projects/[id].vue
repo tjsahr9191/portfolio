@@ -9,24 +9,6 @@ const md = new MarkdownIt({
   typographer: true
 })
 
-// Customize renderer to add IDs to headings for linking
-md.renderer.rules.heading_open = (tokens, idx) => {
-  const token = tokens[idx]
-  const contentToken = tokens[idx + 1]
-  const title = contentToken?.content || ''
-
-  if (!token) return ''
-
-  // Create a simple ID: remove special chars, spaces to hyphens, lowercase
-  const slug = title
-    .toLowerCase()
-    .replace(/[^\w\s-가-힣]/g, '') // Keep Korean, alphanumeric, spaces, hyphens
-    .trim()
-    .replace(/\s+/g, '-')
-
-  return `<h${token.tag.slice(1)} id="${slug}">`
-}
-
 const config = useRuntimeConfig()
 
 const { data: project } = await useFetch<Project>(`/api/v1/projects/${route.params.id}`, {
@@ -37,41 +19,65 @@ const { data: allProjects } = await useFetch<Project[]>('/api/v1/projects', {
 })
 
 // TOC State
-interface TocItem {
-  id: string
-  text: string
-  level: number
-}
-const toc = ref<TocItem[]>([])
 const activeId = ref<string>('')
 
-// Render content
-const renderedContent = computed(() => {
-  return project.value ? md.render(project.value.content) : ''
-})
+// Parse content and extract TOC simultaneously to ensure consistency
+const parsedData = computed(() => {
+  if (!project.value) return { html: '', toc: [] }
 
-// Extract TOC on mount/update based on content
-watchEffect(() => {
-  if (!project.value?.content) return
+  const tokens = md.parse(project.value.content, {})
+  const tocList: { id: string; text: string; level: number }[] = []
+  const seenIds = new Map<string, number>()
 
-  const matches = [...project.value.content.matchAll(/^(#{1,3})\s+(.+)$/gm)]
-  toc.value = matches.map((match) => {
-    const level = match[1]?.length || 0
-    const text = match[2] || ''
-    const id = text
-      .toLowerCase()
-      .replace(/[^\w\s-가-힣]/g, '')
-      .trim()
-      .replace(/\s+/g, '-')
+  tokens.forEach((token, idx) => {
+    if (token.type === 'heading_open') {
+      const contentToken = tokens[idx + 1]
+      const title = contentToken?.content || ''
 
-    return { id, text, level }
+      // Generate slug
+      let slug = title
+        .toLowerCase()
+        .replace(/[^\w\s-가-힣]/g, '') // Keep Korean, alphanumeric, spaces, hyphens
+        .trim()
+        .replace(/\s+/g, '-')
+      
+      // Fallback for empty slug (e.g. only emojis)
+      if (!slug) slug = `section-${idx}`
+
+      // Handle duplicates
+      if (seenIds.has(slug)) {
+        const count = seenIds.get(slug)! + 1
+        seenIds.set(slug, count)
+        slug = `${slug}-${count}`
+      } else {
+        seenIds.set(slug, 0)
+      }
+
+      // Inject ID into the heading token
+      token.attrSet('id', slug)
+
+      tocList.push({
+        id: slug,
+        text: title,
+        level: parseInt(token.tag.slice(1), 10)
+      })
+    }
   })
+
+  // Render HTML using the modified tokens
+  return {
+    html: md.renderer.render(tokens, md.options, {}),
+    toc: tocList
+  }
 })
 
 // Scroll handling for active state
 onMounted(() => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
+      // Logic: if intersecting, set active. 
+      // If leaving intersection, we might want to check which one is currently visible or closest to top.
+      // Simple approach: set active when intersecting.
       if (entry.isIntersecting) {
         activeId.value = entry.target.id
       }
@@ -79,12 +85,17 @@ onMounted(() => {
   }, { rootMargin: '-100px 0px -66% 0px' })
 
   // Observe all headings
-  setTimeout(() => {
-    toc.value.forEach((item) => {
-      const el = document.getElementById(item.id)
-      if (el) observer.observe(el)
-    })
-  }, 500) // Wait for render
+  watchEffect(() => {
+    if (parsedData.value.toc.length > 0) {
+      // Wait for DOM update
+      setTimeout(() => {
+        parsedData.value.toc.forEach((item) => {
+          const el = document.getElementById(item.id)
+          if (el) observer.observe(el)
+        })
+      }, 500)
+    }
+  })
 })
 
 // Scroll to section
@@ -203,7 +214,7 @@ const formatDate = (date: string) => {
             <!-- eslint-disable vue/no-v-html -->
             <div
               class="prose dark:prose-invert max-w-none"
-              v-html="renderedContent"
+              v-html="parsedData.html"
             />
             <!-- eslint-enable vue/no-v-html -->
           </UCard>
@@ -222,7 +233,7 @@ const formatDate = (date: string) => {
               </h3>
               <nav class="space-y-1">
                 <button
-                  v-for="item in toc"
+                  v-for="item in parsedData.toc"
                   :key="item.id"
                   class="block text-sm text-left w-full truncate py-1.5 transition-colors border-l-2 px-3"
                   :class="[
