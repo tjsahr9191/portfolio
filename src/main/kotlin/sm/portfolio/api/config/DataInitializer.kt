@@ -117,6 +117,10 @@ class DataInitializer {
 
 크래프톤 정글 최종 프로젝트로 기획부터 개발까지 전 과정 참여했습니다. 방대한 비정형 소설 데이터를 정형화하고 세계관 일관성을 자동 검증하는 AI 백엔드를 개발했습니다.
 
+> [!NOTE]
+> 본 포트폴리오의 GitHub 링크는 전체 프로젝트에 대한 링크입니다.
+> AI/Backend에 대한 더 자세한 사항은 [Stolink FastAPI Agent](https://github.com/stolink/stolink_fastapi_agent) 리포지토리를 참고해 주세요.
+
 ---
 
 ## 🏗️ 시스템 아키텍처
@@ -362,7 +366,7 @@ RabbitMQ Consumer의 set_qos()에서 prefetch_count를 120으로 설정
 4. RetransmitScheduler가 5분 타임아웃 시 재전송 (최대 3회)
 """,
                         repoUrl = "https://github.com/stolink",
-                        demoUrl = "https://numkyelee.store",
+                        demoUrl = "https://stolink.link",
                         startDate = LocalDate.of(2025, 12, 1),
                         endDate = LocalDate.of(2026, 1, 31),
                         isActive = true,
@@ -746,6 +750,12 @@ Spring Boot, JPA 스터디 후 사이드 프로젝트로 발전시킨 이커머�
 
 ---
 
+## 🏗️ 시스템 아키텍처
+
+![시스템 아키텍처](/images/MarketBridge-archiecture.png)
+
+---
+
 ## 👨‍💻 역할 및 기간
 
 | 구분 | 내용 |
@@ -970,7 +980,7 @@ orderDetailRepository.saveAll(orderDetails);
                         endDate = LocalDate.of(2024, 2, 29),
                         isActive = true,
                         thumbnailUrl = "/images/마켓브릿지.png",
-                        techStack = mutableListOf("Spring Boot", "Spring Security", "Spring Data JPA", "QueryDSL", "JUnit5", "MySQL", "Redis", "H2", "AWS S3", "AWS EC2", "Docker", "Spring REST Docs", "Jenkins", "k6", "Prometheus", "Grafana", "AWS CloudWatch"),
+                        techStack = mutableListOf("Java", "Spring Boot", "Spring Security", "Spring Data JPA", "QueryDSL", "JUnit5", "MySQL", "Redis", "H2", "AWS S3", "AWS EC2", "Docker", "Spring REST Docs", "Jenkins", "k6", "Prometheus", "Grafana", "AWS CloudWatch"),
                         featured = true
                     )
                 )
