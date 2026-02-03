@@ -88,7 +88,6 @@ class DataInitializer {
 
 ### 1️⃣ Kotlin & Spring Boot 3 백엔드 개발
 - **Java 대비 간결한 문법 활용**: Data Class, Smart Cast, Null Safety 등 Kotlin 고유 기능을 통해 코드 생산성 향상
-- **Clean Architecture 지향**: DTO와 Entity 분리, 계층형 아키텍처 설계를 통한 유지보수성 확보
 
 ### 2️⃣ Kubernetes (K3s) 인프라 구축
 - 리소스 효율성을 고려하여 경량화된 K3s 클러스터 도입
@@ -367,8 +366,8 @@ RabbitMQ Consumer의 set_qos()에서 prefetch_count를 120으로 설정
 """,
                         repoUrl = "https://github.com/stolink",
                         demoUrl = "https://stolink.link",
-                        startDate = LocalDate.of(2025, 12, 1),
-                        endDate = LocalDate.of(2026, 1, 31),
+                        startDate = LocalDate.of(2025, 12, 12),
+                        endDate = LocalDate.of(2026, 1, 24),
                         isActive = true,
                         thumbnailUrl = "/images/stolink.png",
                         techStack = mutableListOf("Java", "SpringBoot", "JPA", "SpringDataJpa", "QueryDSL", "Python", "FastAPI", "PostgreSQL", "Neo4j", "Redis", "LangGraph", "RabbitMQ", "AWS EC2", "AWS RDS", "AWS Bedrock", "AWS CloudWatch", "htop", "Docker", "GEMINI API"),
@@ -480,7 +479,7 @@ RabbitMQ Consumer의 set_qos()에서 prefetch_count를 120으로 설정
 - 최대 정원 초과 없이 **정확히 정원만큼만 참가 성공** 확인
 """,
                         startDate = LocalDate.of(2025, 9, 1),
-                        endDate = LocalDate.of(2025, 9, 30),
+                        endDate = LocalDate.of(2025, 9, 3),
                         isActive = true,
                         thumbnailUrl = "/images/court-kok.png",
                         techStack = mutableListOf("Flask", "MongoDB", "WebSocket", "Docker", "GitHub Actions", "Prometheus", "AWS EC2", "AWS CloudWatch", "Grafana"),
@@ -546,8 +545,8 @@ RabbitMQ Consumer의 set_qos()에서 prefetch_count를 120으로 설정
 - 실제 이미지 용량이 더 클수록, **SVD의 압축 효과는 더욱 크게 나타날 수 있기 때문에** 고해상도 이미지에 활용 시 높은 효율을 기대할 수 있습니다.
 - numpy의 SVD 원리를 이해하고 이를 기반으로 사진 압축 프로그램을 **정확하고 안정적으로 구현**하였습니다.
 """,
-                        startDate = LocalDate.of(2024, 6, 1),
-                        endDate = LocalDate.of(2024, 6, 30),
+                        startDate = LocalDate.of(2024, 6, 4),
+                        endDate = LocalDate.of(2024, 6, 20),
                         isActive = true,
                         thumbnailUrl = "/images/svd.png",
                         techStack = mutableListOf("Python", "NumPy"),
@@ -734,8 +733,8 @@ Canny 알고리즘과 허프 변환을 통해 라벨의 기울어진 각도를 �
 - **핸들러 클래스만 추가**하면 신규 기종 즉시 반영 가능
 - 유지보수성과 확장성 확보
 """,
-                        startDate = LocalDate.of(2024, 3, 1),
-                        endDate = LocalDate.of(2024, 5, 31),
+                        startDate = LocalDate.of(2024, 3, 11),
+                        endDate = LocalDate.of(2024, 5, 30),
                         isActive = true,
                         thumbnailUrl = "/images/canon.png",
                         techStack = mutableListOf("Python", "PyTorch", "OpenCV", "CNN", "Flask"),
@@ -976,8 +975,8 @@ orderDetailRepository.saveAll(orderDetails);
 
 **총 성능 개선**: 2분 35초 → 200ms = **약 775배 개선**
 """,
-                        startDate = LocalDate.of(2023, 12, 1),
-                        endDate = LocalDate.of(2024, 2, 29),
+                        startDate = LocalDate.of(2023, 12, 27),
+                        endDate = LocalDate.of(2024, 2, 28),
                         isActive = true,
                         thumbnailUrl = "/images/마켓브릿지.png",
                         techStack = mutableListOf("Java", "Spring Boot", "Spring Security", "Spring Data JPA", "QueryDSL", "JUnit5", "MySQL", "Redis", "H2", "AWS S3", "AWS EC2", "Docker", "Spring REST Docs", "Jenkins", "k6", "Prometheus", "Grafana", "AWS CloudWatch"),
